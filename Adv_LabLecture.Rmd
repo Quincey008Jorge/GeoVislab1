@@ -378,6 +378,11 @@ In this week's lab, you will make an open science markdown that documents your p
 
 ### Questions
 1. Discuss the advantages and challenges associated with an open data science approach. Provide an example based on this week's reading. (1-2 paragraphs)
+For the transparency of open data science:
+On the one hand, publicly available spatial data can help researchers in other fields to access and use the data, e.g. a researcher in economics who wants to do a study on socio-economic differences in different geographical areas can try to find the data he is interested in by accessing these websites with publicly available spatial data, which is likely to play an indispensable role in his research (and for which he could win a Nobel Prize)! If the data were not publicly available, this scholar might have abandoned his current research direction due to the lack of necessary data, and we might have missed out on many potential results that could have changed the course of human development!
+On the other hand, for a set of publicly released data, all people have the authority to download and use it, but different people have different usage scenarios and processing methods for this set of data, which may lead to data being processed and interpreted incorrectly, and if the user publishes or disseminates the incorrect results publicly, it will cause some trouble for the data provider. For example, in order to propagate its ecological restoration works, a national park publicly released the distribution data of brown bears in the past ten years, but a media analyst used the wrong method to analyze the data, and finally got the conclusion that the number of brown bears in the park was decreasing dramatically, and publicly released the data on social media about the national park's brown bear population. The park's reputation has been greatly damaged by the media's condemnation of the park on social media.
+
+
 
 2. Create a markdown document that showcases an analysis of this week's data or any other dataset of your choice. Include descriptive text that explains your analysis, and incorporate figures and geovisualizations.Include 1 chart and 1 map. Structure and explain your analysis with text, headings, highlights, images and other markdown basics. 
 
