@@ -1,0 +1,612 @@
+---
+title: "Lab01 likunxi"
+author: "Kunxi Li"
+date: "10/30/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Why Open Science
+Open science is about making the methods, data and outcomes in your analysis available to everyone. It includes:
+
+ * Greater transparency in the experimental methodology, observation, and collection of data.
+ * Better public availability and reusability of data.
+ * Better public accessibility and transparency through better communication techniques.
+ * Utilizing web-based tools to facilitate collaboration.
+
+
+In this tutorial, you are not going to learn all aspects of open science as listed above. However, you will learn one tool that can be used to make your workflows:
+
+ * More transparent.
+ * More available and accessible to the public and your colleagues.
+
+You will learn how to document your work - by connecting data, methods and outputs in one or more reports or documents. You will learn the R Markdown file format which can be used to generate reports that connect your data, code (methods used to process the data) and outputs. You will use the rmarkdown and knitr package to write R Markdown files in Rstudio and publish them in different formats (html, pdf, etc).
+
+
+
+## About R Markdown
+Simply put, ```.Rmd``` is a text based file format that allows you to include both descriptive text, code blocks and code output. You can run the code in R using a package called knitr (which you will learn about next). You can export the text formated .Rmd file to a nicely rendered, shareable format like pdf or html. When you knit (or use knitr), the accompanying code is executed, resulting  the outputs (e.g. plots, and other figures) appearing in the rendered document.
+
+R Markdown (.Rmd) is an authoring format that enables easy creation of dynamic documents, presentations, and reports from R. It combines the core syntax of markdown (an easy to write plain text format) with embedded R code chunks that are run so their output can be included in the final document. R Markdown documents are fully reproducible (they can be automatically regenerated whenever underlying R code or data changes).“ RStudio documentation.
+
+
+
+## R Markdown
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunks in your knitr markdown using: 
+
+```{r}
+```
+
+There are also several option that you can add to this fucntion ```{r}``` to change how your code runs (e.g. ```{r, include=FALSE}```). 
+
+### Markdown basics
+Now let's learn additional basics that you can use for creating your markdown documents. 
+
+#### Text
+Plain text
+
+End a line with two spaces
+
+to start a new paragraph.
+
+
+#### Highlighted text and special characters
+*italics* and **bold**
+
+`verbatim code`
+
+sub/superscript^2^~2~
+
+~~strikethrough~~
+
+
+####
+escaped: \* \_ \\
+
+endash: --, emdash: ---
+
+equation: $A = \pi*r^{2}$
+
+equation block:
+$$E = mc^{2}$$
+
+> block quote
+
+
+# Header1 {#anchor}
+## Header 2 {#css_id}
+### Header 3 {.css_class}
+#### Header 4
+##### Header 5
+###### Header 6
+
+<!--Text comment-->
+
+\textbf{Tex ignored in HTML}
+
+<em>HTML ignored in pdfs</em>
+
+<http://www.rstudio.com>
+
+[link](www.rstudio.com)
+
+Jump to [Header 1](#anchor)
+
+image:
+![Caption](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2")
+
+* unordered list
+ + sub-item 1
+ + sub-item 2
+ - sub-sub-item 1
+
+* item 2
+ Continued (indent 4 spaces)
+
+1. ordered list
+2. item 2
+ i) sub-item 1
+ A. sub-sub-item 1
+(@) A list whose numbering
+continues after
+(@) an interruption
+
+Term 1: Definition 1
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+| 12 | 12 | 12 | 12 |
+| 123 | 123 | 123 | 123 |
+| 1 | 1 | 1 | 1 |
+
+- slide bullet 1
+- slide bullet 2
+(>- to have bullets appear on click)
+
+horizontal rule/slide break:
+***
+A footnote [^1]
+[^1]: Here is the footnote.
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+## Projects and Github in R Studio
+To initiate your project, the first step is to establish a dedicated project folder that will serve as a centralized repository for all your data and code, facilitating efficient organization. Within your coding or development environment, you can create this project folder by selecting "File" and then "New File." If your aim is to keep your code and data organized locally, consider adding a "New Directory" within the project folder. Alternatively, for more advanced version control and collaboration, you can opt to utilize Version Control through platforms like GitHub. To do so, start by creating a GitHub account on github.com and proceed to establish a repository to host your project, enabling seamless version control and collaborative project management. This structured approach ensures that your project remains well-organized and accessible for effective development and collaboration. Create a repository by selecting "New"  
+
+![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\NewGit.PNG)
+
++ Name your repository what you like. 
++ Enter a description for your repository.
++ Choose Public visibility.
++ Select Initialize this repository with a README.
++ Click Add .ignore and select R.
++ Click Create repository.
+
+
+![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\GithubPage.PNG)
+
+
+With the repository created, we can get the url to it using the code button and copying it. 
+
+![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\Code.PNG)
+
+
+Now we will return to R Studio, and create a project with "Version Control", choose Git
+
+
+![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\VersionControlProject.PNG)
+
+Proceed by following the prompt to add the Repository URL for your project. This action will initiate the download of the repository you have created on GitHub to your computer. During this process, you will specify the directory and folder in which you want to store the downloaded repository. Once this download is successfully executed, you will gain access to a "git" tab within your coding or development environment. This tab will serve as your control center for managing version control, allowing you to track changes, collaborate with others, and maintain a well-organized and up-to-date project.
+
+![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\Gittab.PNG)
+
+With the repository successfully downloaded and integrated into your project folder, any files you add or modify within this folder will be continuously monitored. This means that every change or addition you make to files, excluding those specified in the "gitignore" file, will be tracked. Moreover, you will have the option to push these changes to your GitHub repository, ensuring that your project remains up to date on the remote repository. This streamlined process simplifies version control and collaboration, allowing you to effectively manage and synchronize your project across different environments. 
+
+
+### Create your own markdown and start committing!
+```{r}
+library(ggplot2)
+library(sf)
+library(tidyverse)
+```
+
+1. Let's also grab some data [here](https://drive.google.com/drive/folders/1YuX5oWjKS6vZx4zNyPwBKuiw9EJYNX5L?usp=sharing). This is spatial point dataset that I have collected as part of a project in the Open Spaces and Moutain Parks of Boulder Colorado. It consist of the points where people have taken pictures using Flickr and Panramio. We have also collected several spatial varibles that might explain why individuals might be taking photographs at these points and all other points in park. We will import the data as a sf spatial dataset.
+
+```{r}
+boulder <- st_read("Boulder_Data/BoulderSocialMedia.shp")
+boulder
+```
+This Here are the details of data: 
+
+|  Variable  |  Description   |
+|------------|-----------------------------------------------------------------------------------|
+| DB |  indicates whether the point is a   social media location (Flickr or Panramio) or a point in the park |
+| extent |  extent that can be viewed at each   point estimated through viewshed analysis  |
+| Climb_dist |  distance to nearest climbing wall |
+| TrailH_Dis |  distance to hiking trails |
+| NatMrk_Dis |  distance to natural landmark |
+| Trails_dis |  distance to walking trails |
+| Bike_dis |  distance to biking trails |
+| PrarDg_Dis |  distance to prairie dog mounds |
+| PT_Elev |  Elevation |
+| Hydro_dis |  distance to lakes, rivers and   creeks |
+| Street_dis |  distance to streets and parking   lots |
+
+
+
+2. We can plot these variables using [ggplot2](https://ggplot2.tidyverse.org/reference/ggsf.html). We define the sf data using the ```geom_sf``` function. The different arguments control the object attributes(this can be points, lines or polygons). For example, ```fill=``` control the color of object outline. ```alpha =``` controls the opacity of the object. The final argument is a complete theme, which controls the non-data display(e.g. neatlines, gradicule title). More details can be found regarding these [themes] here(https://ggplot2.tidyverse.org/reference/ggtheme.html). Here we use ```theme_bw```, which is the black and white theme. You can try other themes to explore the different options.
+
+```{r}
+ggplot() +
+    geom_sf(data =boulder,
+    fill = NA, alpha = .2) +
+    theme_bw()
+```  
+
+
+3. At the moment, the projection is a bit weird. Let's project the data using an appropriate projection for Colorado. Use the [epsg.io](https://epsg.io/) website for choosing the an appropriate projection
+
+```{r}
+boulder = st_transform(boulder, 26753) 
+ggplot() +
+    geom_sf(data =boulder,
+    fill = NA, alpha = .2) +
+    theme_bw()
+```
+
+
+### Commit and push the changes to GitHub
+Now that you have created the R Markdown document, you might want to start committing these changes.
+
++ In RStudio click the Git tab in the upper right pane.
++ ick Commit.
++ In the Review changes view, check the staged box for all files.
++ Add a commit message, for example Add initial code.
++ Click Commit.
++ Click the Pull button to fetch any remote changes(perhaps others working on the code).
++ Click the Push button to push your changes to the remote repository.
++ On GitHub, navigate to the Code tab of the repository to see the changes.
+
+As you progress with your project, you can commit your changes periodically to maintain a clear version history. This practice ensures that you can easily track and revert to previous states of your project if needed. Additionally, for added convenience, you can clone your project's code onto other machines. This allows you to seamlessly continue your coding work across different environments, such as your UMICH workstation and personal machines, without any disruptions or discrepancies.
+
+4. Now we will explore different methods for visualizing this data. We will add 'Gradient colour scales' in ggplot2. Here is the documentation of these options https://ggplot2.tidyverse.org/reference/scale_gradient.html.   
+
+```{r}
+ggplot() +
+    geom_sf(data =boulder, aes(color=PT_Elev),
+    fill = NA, alpha = .2) +
+    theme_bw()
+```
+
+
+5. ```ggplot2``` has several gradient colour scale options. The details can be found [here](https://ggplot2.tidyverse.org/reference/scale_gradient.html).  
+
+```{r}
+ggplot() +
+    geom_sf(data =boulder, aes(color=PT_Elev),
+    fill = NA, alpha = .2) +
+  scale_colour_gradientn(colours = terrain.colors(10)) +  
+  theme_bw()
+```
+
+
+6. Let's look at the locations above 2200 meters. For this we will need to use the ```ifelse()``` function. The function basically means if the first argument is true (PT_Elev >= 2200), the elevation is greater than 2200 meter, then print the first varible: TRUE; if not true, print the second varible: FALSE. We use the mutate fucntion to make a new variable in our boulder dataframe. We then use ggplot to plot these locations.    
+
+```{r}
+#library(dplyer)
+boulder %>%
+    mutate(high_elev = ifelse(PT_Elev >= 2200, TRUE, FALSE))%>% 
+ggplot() +
+  geom_sf(aes(color=high_elev),
+    fill = NA, alpha = .2)  +  
+  theme_bw()
+```
+
+
+7. We can also plot different charts using ggplot. Let's compare the distance from roads and social media photographs. Here we ```filter()``` to analyze social media only. We use a box plot to compare mean distance of these photographs from the nearest road. What does this test?  
+
+```{r}
+boulder %>%
+  filter(DB ==  'Pano' | DB == 'Flickr') %>%
+  ggplot(aes(x=DB, y=Street_dis)) + 
+  geom_boxplot()
+```
+As you can see there is no [significant relationship](https://blog.bioturing.com/2018/05/22/how-to-compare-box-plots/). The mean values and standard deviation is highly similar. There are numerous other tests and charts that you can use to investigate the relationship between locations of soical media photographs and other locations in the park. 
+
+
+## Additional Geovis tools
+We are also going to learn about two new packages that might be helpful for your data science approach. We will learn about the ```library(viridis)```, which provides color palettes that are interpretable for visually impaired.  
+
+
+### The color scale 
+The package viridis contains four color scales: “Viridis”, the primary choice, and three alternatives with similar properties, “magma”, “plasma”, and “inferno”. 
+
+![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\Viridis.png)
+
+```{r}
+library(sf)
+library(ggspatial)
+library(viridis)
+## the function gives the hexadecimal colors 
+## the interger give the numbers of colors
+magma(10)
+```
+
+
+```{r}
+boulder <- st_read("./Boulder_Data/BoulderSocialMedia.shp")
+ggplot() +
+    geom_sf(data = boulder, aes(color=PT_Elev),
+    fill = NA, alpha = .2) + 
+    scale_colour_gradientn(colours = magma(10))
+```
+
+We can also plot discrete values.  
+```{r}
+summary(boulder$DB)
+```
+
+```{r}
+p <- ggplot() +
+  annotation_spatial(boulder) +
+  layer_spatial(boulder, aes(col = DB))
+p + scale_color_brewer(palette = "Dark2")
+```
+
+
+### tmaps
+Alternatively, we can use tmap a way to create maps using R
+
+```{r}
+library(tmap)
+## Add the data - these are specific to the vector or raster
+tm_shape(boulder) + 
+  ## which variable, is there a class interval, palette, and other options
+  tm_symbols(col='PT_Elev', 
+             style='quantile', 
+             palette = 'YlOrRd',
+             border.lwd = NA,
+             size = 0.1)
+
+```
+
+It is really easy to add cartographic elements in tmap
+
+```{r}
+## here we are using a simple dataset of the world 
+# tmap_mode("plot")
+data("World")
+tm_shape(World) +
+    tm_polygons("gdp_cap_est", style='quantile', legend.title = "GDP Per Capita Estimate")
+```
+
+
+It is really easy to make an interactive map in tmap as well 
+```{r}
+## the view mode creates an interactive map
+tmap_mode("view")
+
+tm_shape(World) +
+    tm_polygons("gdp_cap_est", style='quantile', legend.title = "GDP Per Capita Estimate")
+
+```
+
+## Advanced Week 1 Lab Assignment
+In this week's lab, you will make an open science markdown that documents your process of data analysis and geovisualization. We will be using git to aid in version control for the code. Your assignment is to use Knitr to develop a markdown document that shows your analysis of the Boulder data (you can also use your own data if you wish). Demonstrate how you did your analysis giving step-by-step instructions with the accompanying code.   
+
+Use rgee package to analyse the change trend of NDVI of Michigan over past 23 years in MODIS NDVI product
+
+```{r}
+library(cptcity)
+library(raster)
+library(stars)
+library(rgee)
+library(sf)
+
+ee_Initialize(drive = TRUE)
+```
+
+Since Earth Engine doesn't have Michigan's boundary shapefile, we collect the file from Data.gov website and convert it to ee. type geometry
+```{r}
+# Load the shapefile
+sf_data <- st_read("MI_Bound/Counties_(v17a).shp")
+roi <- sf_data %>%
+    st_geometry() %>%
+      sf_as_ee()
+```
+
+Define a function that will create yearly max MODIS NDVI composite for each pixels and add the modified time property to each new composite image.
+```{r}
+#Define a function to extract and create an annual median NDVI image collection 
+get_annual_NDVI <- function(num) {
+  num <- ee$Number(num)
+  year_start <- ee$Date$fromYMD(num, 1, 1)
+  year_end <- year_start$advance(1, 'year')
+  year_image <- ee$ImageCollection('MODIS/006/MOD13A1')$filterDate(year_start, year_end)$max()
+  year_ndvi <- year_image$select('NDVI')
+  year_ndvi <- year_ndvi$set('system:time_start', year_start)
+  return(year_ndvi$addBands(ee$Image$constant(num)$toFloat()))
+}
+
+# Use this function to utilize the function in rgee
+get_annual_NDVI_ee <- ee_utils_pyfunc(get_annual_NDVI)
+
+year_list <- ee$List$sequence(2000, 2019)
+img_collection <- ee$ImageCollection(year_list$map(get_annual_NDVI_ee))
+print(img_collection)
+```
+
+Use reduce function in Earth Engine to conduct linear regression to the yearly NDVI images and display the interactive results.
+
+```{r}
+# Fit a linear regression to the data
+linearFit <- img_collection$select(c('constant', 'NDVI'))$reduce(ee$Reducer$linearFit())
+
+# Define visualization parameters
+trendVis <- list(min = -100, max = 100, palette = c('040274', '040281', '0502a3', '0502b8', '0502ce', '0502e6', '0602ff', '235cb1', '307ef3', '269db1', '30c8e2', '32d3ef', '3be285', '3ff38f', '86e26f', '3ae237', 'b5e22e', 'd6e21f', 'fff705', 'ffd611', 'ffb613', 'ff8b13', 'ff6e08', 'ff500d', 'ff0000', 'de0101', 'c21301', 'a71001', '911003'))
+
+# Add the image collection to a Google Map
+Map$centerObject(roi, zoom = 8) # Center map. Replace table with a valid object
+Map$addLayer(linearFit$select('scale')$clip(roi), trendVis, 'trend')
+```
+
+Download the image from Google Drive and use it to create a map layout  
+```{r}
+library(raster)
+library(viridis)
+library(ggrepel)
+library(sf)
+library(terra)
+# linearFit_raster <- ee_as_rast(linearFit,
+#                                  region = roi$geometry(),
+#                                  dsn = "linearTrend_MI.tif",
+#                                  scale = 500,
+#                                  via = "drive")
+linearFit_raster <- rast('linearTrend_MI.tif')
+
+#Set limilations of values of NDVI slope to better display
+scale_raster<- linearFit_raster$scale
+scale_raster[scale_raster<=-30] <- NA
+scale_raster[scale_raster>=30] <- NA
+#Set breakpoints and colors to display
+plot(scale_raster,
+     main = 'NDVI slope in Michigan from 2000 to 2019',
+            plg=list(
+                title = "Slope",
+                loc = "bottom",
+                title.cex = 0.8, 
+                cex = 1 
+            ))
+north()
+sbar(type="bar", below="km", label=c(0,7.5,15), cex=.8,xpd = TRUE)
+```
+
+The shapefile used in this case consists names of counties in Michigan State, so we can create a boxplot of the NDVI trend values of some of the counties to find whether there are huge differences among these counties. We choose
+
+
+```{r}
+
+# Load raster and shapefile
+slope_raster <- raster('linearTrend_MI.tif')
+mi_counties <- st_read('MI_Bound/Counties_(v17a).shp')
+
+# Extract the names of counties from the shapefile
+counties <- as.data.frame(mi_counties)$NAME
+
+# Select the counties of interest.
+selected_counties <- mi_counties[counties %in% c('Washtenaw', 'Gladwin', 'Iron'), ]
+
+# Use extract to get the values of raster within the boundaries of selected counties
+slope_values <- extract(slope_raster, selected_counties)
+
+# Convert the result to a data frame
+slope_df <- do.call(rbind, lapply(1:length(slope_values), function(i) {
+  data.frame(County = as.character(selected_counties$NAME[i]), Slope = slope_values[[i]])
+}))
+
+# Remove NA values
+slope_df <- na.omit(slope_df)
+
+# Create boxplot
+boxplot <- ggplot(slope_df, aes(x = County, y = Slope)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(x = "County", y = "NDVI Slope", title = "NDVI slope by county")
+
+print(boxplot)
+```
+In the box plot we can see that all mean values of these three counties are greater than 0, which shows that annual vegetation growing status among these states are getting better during these 23 years(2000-2022), as for the variability of the data, Iron County's change trend is more stable while Washtenaw County's change trend are more widely spread.
+
+
+    
+
+### Questions
+1. Discuss the advantages and challenges associated with an open data science approach. Provide an example based on this week's reading. (1-2 paragraphs)
+For the transparency of open data science:
+On the one hand, publicly available spatial data can help researchers in other fields to access and use the data, e.g. a researcher in economics who wants to do a study on socio-economic differences in different geographical areas can try to find the data he is interested in by accessing these websites with publicly available spatial data, which is likely to play an indispensable role in his research (and for which he could win a Nobel Prize)! If the data were not publicly available, this scholar might have abandoned his current research direction due to the lack of necessary data, and we might have missed out on many potential results that could have changed the course of human development!
+On the other hand, for a set of publicly released data, all people have the authority to download and use it, but different people have different usage scenarios and processing methods for this set of data, which may lead to data being processed and interpreted incorrectly, and if the user publishes or disseminates the incorrect results publicly, it will cause some trouble for the data provider. For example, in order to propagate its ecological restoration works, a national park publicly released the distribution data of brown bears in the past ten years, but a media analyst used the wrong method to analyze the data, and finally got the conclusion that the number of brown bears in the park was decreasing dramatically, and publicly released the data on social media about the national park's brown bear population. The park's reputation has been greatly damaged by the media's condemnation of the park on social media.
+
+
+
+2. Create a markdown document that showcases an analysis of this week's data or any other dataset of your choice. Include descriptive text that explains your analysis, and incorporate figures and geovisualizations.Include 1 chart and 1 map. Structure and explain your analysis with text, headings, highlights, images and other markdown basics. 
+
+Bonus: Capture a screenshot of the history of your Git commits. Share your strategy for utilizing Git in your workflow.
+
+
+1)Create a New Project in RStudio & Integrate with GitHub:
+Go to File -> New Project -> Version Control -> Git. In the "repository URL", paste the URL of your new GitHub repository. This will create a new project that is linked to your GitHub repository. This step would also create a local folder/repository on your computer synchronized with an empty GitHub repository.
+
+
+
+2)Create, Modify, or Add Existing Code or Files to this Directory
+You can work within RStudio or manually add files to the project folder created. Any .R or .Rmd script files added or edited within this directory can be tracked by Git.
+
+
+
+3)Commit Changes and Push to GitHub:
+Within RStudio's Git pane, you can see modified or new files since the last commit. You should stage the changes by checking the boxes next to each modified or new file, commit the changes by clicking on "Commit", and writing a message describing the changes. After committing, click "Push" to upload changes to the GitHub repository. It's good practice to make frequent commits with descriptive messages.
+
+
+
+4)Pull Changes from GitHub:
+If working collaboratively or across different machines, you can 'Pull' the latest changes from the GitHub repository by clicking on the 'Pull' button in RStudio's Git pane. This helps to keep your local repository up-to-date with the remote GitHub repository.
+
+
+![](Github_Commit.png)
+
+
+Here are the evaluation criteria for the geovisualizations. Questions will be worth 30% of your grade, while the geovisualization and explanation will be worth 70%.    
+
+
+| Evaluation              | *Highly well-done* 	|*Well-done* 	| *Some deficiencies* 	| *Several deficiencies* 	|
+|--------------------------|-------------|-------------|-------------|-------------|
+| **Cartographic principles** - 20% (title, name, date, north arrow, scale, legend, explanation symbols)  | Elements present and correctly portrayed (100%) 	| Most elements present and correctly portrayed (99-80%) 	| Some elements  (when appropriate) present and correctly portrayed (79-50%) 	| Minimal  information (<50%) 	|
+| **Presentation and  Legibility** - 20% (readable, consistency and ease of understanding, flow of ideas consistent with cognition, clear explanation of content)  	| Highly legible, consistent and easy to  understand (100%) 	| Mostly legible, consistent and easy to   understand (99 -80%) 	| Somewhat legible, consistent and easy to understand (79-50%) 	| Minimally legible, consistent and poorly   understandable (<50%) 	|
+| **Content**  -   20% (relevant, coherent and interesting topic, appropriate subject matter   given the presented information/data, free of bias and error ) 	| Highly relevant coherent, and interesting;   consistent information free of bias and error (100%) 	| Mostly relevant coherent, and interesting;    consistent information free of bias and error (99 -80%) 	| Somewhat relevant coherent, and interesting;   some inconsistencies in information(79-50%) 	| Minimally relevant coherent, and interesting;   inconsistencies in information  (<50%) 	|
+| **Aesthetics**    - 20% (is the map attractive, are there objective elements that are popularly viewed as beautiful)  | Highly attractive/ beautiful (100%) 	| Mostly attractive/ beautiful (99 -80%) 	| Somewhat attractive/beautiful (79-50%) 	| Minimally attractive beautiful (<50%) 	|
+| **Creativity and  persuasiveness**  - 20% (imaginative information/data,   convincing argumentation, presence of sustainability principles) 	| Highly imaginative; convincing of   sustainability  principles (100%) 	| Mostly imaginative; convincing of   sustainability  principles (99   -80%) 	| Somewhat imaginative; less convincing of   sustainability  principles (79-50%) 	| Minimally imaginative; not convincing of   sustainability  principles (<50%)    |    
+
+
+### Optional steps for Hosting a HTML of your RMD as a Website on GitHubn 
+It is rather simple to make your html publicly available via github. Here is an example of one I made for a recent paper <https://derekvanberkel.github.io/Planning-for-climate-migration-in-Great-Lake-Legacy-Cities/>. Below are the step to make the knit html you make for this lab into a static website. Here is another website that give more detail <https://blog.flycode.com/how-to-deploy-a-static-website-for-free-using-github-pages>  
+
+
+**Create a New Repository:**
+
+1. Click on the '+' sign at the top right corner and select "New repository."
+
+**Fill in Repository Information:**
+
+1. Choose a name for your repository. This will be part of your website's URL, so choose it accordingly.
+2. You can choose to make the repository public (visible to everyone) or private (restricted access).
+3. Optionally, add a description for your repository.
+4. Make sure the "Initialize this repository with a README" option is unchecked.
+5. Click the "Create repository" button.
+
+**Add Your HTML File:**
+
+Now, you need to add your HTML file to the repository. You can do this in several ways:
+- Use the GitHub web interface to upload your HTML file. Click on the "Add file" button, then select "Upload files" and follow the instructions.
+- If you're comfortable with Git, you can clone your repository to your local machine, add your `index.html` file to the local folder, and push the changes back to GitHub.
+
+**Commit Changes:**
+
+After adding your HTML file to the repository, you need to commit the changes. On the GitHub website:
+1. Navigate to the repository.
+2. Click on the "Add file" button and select "Create a new file."
+3. Name the file `index.html` and add your HTML code to it.
+4. Scroll down to the "Commit new file" section.
+5. Enter a "Commit summary" (e.g., "Initial commit").
+6. Click the "Commit new file" button.
+
+**Configure GitHub Pages:**
+
+Once your HTML file is in the repository, go to your repository's main page.
+1. Click on the "Settings" tab (located towards the right, under your repository's name).
+2. Scroll down to the "GitHub Pages" section
+3. Navigate to the `Pages` tab and click it
+4. Under the "Source" section, click the dropdown under "Branch" and select "main" (or your repository's default branch).
+5. Click the "Save" button.
+
+**Wait for Deployment:**
+
+GitHub Pages may take a few minutes to build and deploy your site. Be patient; it usually happens within 10 minutes.
+
+**Access Your Live Website:**
+
+After GitHub Pages has deployed your site, you'll find the URL associated with your website in the "GitHub Pages" section of your repository's settings. It should be something like `https://yourusername.github.io/repositoryname`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
