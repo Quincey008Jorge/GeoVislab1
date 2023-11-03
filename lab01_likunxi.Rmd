@@ -152,7 +152,6 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 ## Projects and Github in R Studio
 To initiate your project, the first step is to establish a dedicated project folder that will serve as a centralized repository for all your data and code, facilitating efficient organization. Within your coding or development environment, you can create this project folder by selecting "File" and then "New File." If your aim is to keep your code and data organized locally, consider adding a "New Directory" within the project folder. Alternatively, for more advanced version control and collaboration, you can opt to utilize Version Control through platforms like GitHub. To do so, start by creating a GitHub account on github.com and proceed to establish a repository to host your project, enabling seamless version control and collaborative project management. This structured approach ensures that your project remains well-organized and accessible for effective development and collaboration. Create a repository by selecting "New"  
 
-![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\NewGit.PNG)
 
 + Name your repository what you like. 
 + Enter a description for your repository.
@@ -162,22 +161,16 @@ To initiate your project, the first step is to establish a dedicated project fol
 + Click Create repository.
 
 
-![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\GithubPage.PNG)
 
 
 With the repository created, we can get the url to it using the code button and copying it. 
 
-![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\Code.PNG)
 
 
 Now we will return to R Studio, and create a project with "Version Control", choose Git
 
-
-![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\VersionControlProject.PNG)
-
 Proceed by following the prompt to add the Repository URL for your project. This action will initiate the download of the repository you have created on GitHub to your computer. During this process, you will specify the directory and folder in which you want to store the downloaded repository. Once this download is successfully executed, you will gain access to a "git" tab within your coding or development environment. This tab will serve as your control center for managing version control, allowing you to track changes, collaborate with others, and maintain a well-organized and up-to-date project.
 
-![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\Gittab.PNG)
 
 With the repository successfully downloaded and integrated into your project folder, any files you add or modify within this folder will be continuously monitored. This means that every change or addition you make to files, excluding those specified in the "gitignore" file, will be tracked. Moreover, you will have the option to push these changes to your GitHub repository, ensuring that your project remains up to date on the remote repository. This streamlined process simplifies version control and collaboration, allowing you to effectively manage and synchronize your project across different environments. 
 
@@ -300,7 +293,6 @@ We are also going to learn about two new packages that might be helpful for your
 ### The color scale 
 The package viridis contains four color scales: “Viridis”, the primary choice, and three alternatives with similar properties, “magma”, “plasma”, and “inferno”. 
 
-![](C:\Users\dbvanber\Dropbox (University of Michigan)\Geovis\Labs\Adv_Week_1\Adv_LabLecture1\Viridis.png)
 
 ```{r}
 library(sf)
@@ -460,8 +452,11 @@ north()
 sbar(type="bar", below="km", label=c(0,7.5,15), cex=.8,xpd = TRUE)
 ```
 
-The shapefile used in this case consists names of counties in Michigan State, so we can create a boxplot of the NDVI trend values of some of the counties to find whether there are huge differences among these counties. We choose
+From the map we can see some distribution pattern of NDVI slope in Michigan and neighborhood areas, negative trends are mainly distributed in the upper peninsula and the upper north part of lower peninsula which indicates that the vegetation there may suffer some degradation these years. 
 
+
+
+The shapefile used in this case consists names of counties in Michigan State, so we can create a boxplot of the NDVI trend values of some of the counties to find whether there are huge differences among these counties. We choose Washtenaw, Gladwin and Iron conties as the samples.
 
 ```{r}
 
@@ -494,6 +489,7 @@ boxplot <- ggplot(slope_df, aes(x = County, y = Slope)) +
 
 print(boxplot)
 ```
+
 In the box plot we can see that all mean values of these three counties are greater than 0, which shows that annual vegetation growing status among these states are getting better during these 23 years(2000-2022), as for the variability of the data, Iron County's change trend is more stable while Washtenaw County's change trend are more widely spread.
 
 
@@ -532,6 +528,13 @@ If working collaboratively or across different machines, you can 'Pull' the late
 
 
 ![](Github_Commit.png)
+![](Github_Commit2.png)
+![](Github_Commit3.png)
+
+
+
+
+
 
 
 Here are the evaluation criteria for the geovisualizations. Questions will be worth 30% of your grade, while the geovisualization and explanation will be worth 70%.    
